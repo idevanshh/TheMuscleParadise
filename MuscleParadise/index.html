@@ -1,0 +1,2230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>The Muscle Paradise</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Add these CSS variables in your existing style section, right after the * selector */
+        :root {
+            --bg-color: #000;
+            --text-color: #fff;
+            --card-bg: #111;
+            --accent-color: #FFD700;
+            --hover-color: #ffb700;
+            --card-gradient: linear-gradient(145deg, #1a1a1a, #111);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Same as header height */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-top: 80px; /* Adjust this value based on your header height */
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.95); /* More opaque background */
+            padding: 15px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px); /* Add blur effect */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .title-line {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo-text .the {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .logo-text .muscle-paradise {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logo-text .muscle {
+            font-size: 28px;
+            color: #fff;
+            font-weight: 900;
+        }
+
+        .logo-text .paradise {
+            font-size: 28px;  /* Increased from 24px to match muscle size */
+            color: #ffd700;
+            font-weight: 900;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            height: calc(100vh - 80px); /* Subtract header height from viewport height */
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80') no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: -80px; /* Offset the body padding */
+            padding-top: 80px; /* Add padding to prevent content overlap */
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: #ddd;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background: #ffd700;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #ffb700;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .section {
+            padding: 80px 20px; /* Increased top padding */
+            text-align: center;
+            scroll-margin-top: 80px; /* This prevents section titles from being hidden under header */
+        }
+
+        .section h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: var(--accent-color);
+        }
+
+        .section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #ddd;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .service {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .service:hover {
+            transform: translateY(-10px);
+        }
+
+        .service img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .service h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .service p {
+            color: #ddd;
+        }
+
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .logo span {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .trainers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .trainer {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .trainer:hover {
+            transform: translateY(-10px);
+        }
+
+        .trainer img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .trainer h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .trainer p {
+            color: #ddd;
+            font-size: 16px;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s ease;
+        }
+
+        .top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #ffd700;
+            color: #000;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .testimonial {
+            background: var(--card-gradient);
+            padding: 30px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+        }
+
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .testimonial p {
+            color: #ddd;
+            font-style: italic;
+            margin: 15px 0;
+        }
+
+        .testimonial h4 {
+            color: #ffd700;
+            font-size: 18px;
+        }
+
+        .bmi-calculator {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            gap: 5px;
+        }
+
+        .input-group label {
+            color: #ffd700;
+            font-size: 18px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #222;
+            color: #fff;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        .input-group input:focus {
+            outline: 2px solid #ffd700;
+            background: #333;
+        }
+
+        #bmi-result {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            opacity: 1;
+            transition: opacity 0.5s ease-in;
+        }
+
+        #bmi-result.result-hidden {
+            display: none;
+        }
+
+        #bmi-result h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        #bmi-category {
+            color: #ddd;
+            font-size: 18px;
+        }
+
+        #bmi-message {
+            color: #ddd;
+            font-size: 16px;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .calculators-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .calculator {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator h3 {
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #222;
+            color: #fff;
+            border-radius: 3px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .input-group select:focus {
+            outline: 2px solid #ffd700;
+            background: #333;
+        }
+
+        #calorie-result {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        #calorie-goals {
+            margin-top: 15px;
+            color: #ddd;
+        }
+
+        #calorie-goals p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 5px;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .price-card.featured {
+            border: 2px solid #ffd700;
+            transform: scale(1.05);
+        }
+
+        .price-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #ffd700;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .price-card h3 {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .price {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .price .amount {
+            font-size: 42px;
+            font-weight: bold;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .price .period {
+            color: #ddd;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .features li {
+            color: #ddd;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            text-align: center;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .price-card .btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-grid {
+                padding: 0 20px;
+            }
+            
+            .price-card.featured {
+                transform: scale(1);
+            }
+            
+            .price-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+
+        .location-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .location-info {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .location-info h3 {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .address {
+            color: #ddd;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .address p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .address ul {
+            list-style: none;
+            margin-left: 25px;
+        }
+
+        .address ul li {
+            margin-bottom: 5px;
+        }
+
+        .map {
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .location-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+            
+            .map iframe {
+                height: 300px;
+            }
+        }
+
+        .supplements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .supplement-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .supplement-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .supplement-card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .supplement-card h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .supplement-card .price {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .supplement-details {
+            color: #ddd;
+        }
+
+        .supplement-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .supplement-details ul li {
+            margin-bottom: 10px;
+        }
+
+                .supplements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .supplement-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 5px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .supplement-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .supplement-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .supplement-card h3 {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .supplement-card .price {
+            font-size: 28px;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .supplement-details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .supplement-details p {
+            color: #ddd;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .supplement-details ul {
+            list-style: none;
+            color: #ddd;
+            padding-left: 20px;
+        }
+
+        .supplement-details li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .supplement-details li:before {
+            content: "•";
+            color: #ffd700;
+            position: absolute;
+            left: -15px;
+        }
+
+        @media (max-width: 768px) {
+            .supplements-grid {
+                padding: 0 20px;
+            }
+        }
+
+                .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .developer-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            padding: 0 20px;
+        }
+
+        .contact-form {
+            background: rgba(17, 17, 17, 0.95);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            color: #FFD700;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.1);
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            top: 2.8rem;
+            color: #FFD700;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-group:focus-within .input-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: #FFE55C;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 768px) {
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+
+        /* Add this to your existing styles */
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+        
+        .fa-spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-nav-toggle span {
+            width: 30px;
+            height: 3px;
+            background: #FFD700;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav-toggle {
+                display: flex;
+            }
+            
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 70px; /* Adjust based on mobile header height */
+                left: 0;
+                width: 100%;
+                background: #000;
+                flex-direction: column;
+                padding: 20px;
+                max-height: calc(100vh - 70px);
+                overflow-y: auto;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+
+            body {
+                padding-top: 70px;
+            }
+            
+            .section {
+                scroll-margin-top: 70px;
+            }
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: #FFD700;
+            width: 0;
+            z-index: 1002;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding: 50px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .counter {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FFD700;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 50px;
+        }
+
+        .testimonial {
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(255,215,0,0.1);
+        }
+
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .testimonial p {
+            color: #ddd;
+            font-style: italic;
+            margin: 20px 0;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .testimonial h4 {
+            color: #FFD700;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .member-status {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(255,215,0,0.1);
+            color: #FFD700;
+            border-radius: 15px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials {
+                padding: 0 20px;
+            }
+            
+            .testimonial {
+                padding: 20px;
+            }
+        }
+
+        /* Update contact form styles */
+        .contact-container {
+            max-width: 600px;  /* Reduced from default width */
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: rgba(17, 17, 17, 0.95);
+            padding: 2rem;  /* Reduced from 3rem */
+            border-radius: 8px;  /* Reduced from 10px */
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;  /* Reduced from 2rem */
+            position: relative;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;  /* Reduced from default */
+            margin-bottom: 0.5rem;  /* Reduced from 0.8rem */
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;  /* Reduced from 1rem */
+            font-size: 0.9rem;  /* Reduced from 1rem */
+        }
+
+        .form-group textarea {
+            min-height: 100px;  /* Reduced from 120px */
+        }
+
+        .input-icon {
+            top: 2.4rem;  /* Adjusted for new sizing */
+            font-size: 0.9rem;  /* Reduced icon size */
+        }
+
+        .submit-btn {
+            padding: 0.8rem;  /* Reduced from 1.2rem */
+            font-size: 1rem;  /* Reduced from 1.1rem */
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .contact-form {
+                padding: 1.5rem;  /* Further reduced for mobile */
+            }
+            
+            .contact-container {
+                padding: 0 1rem;  /* Add some padding on mobile */
+            }
+        }
+
+        /* Add this to your existing style section */
+        .social-media-links {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-media-links h3 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-icon {
+            color: #FFD700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #FFF;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .social-media-links {
+                margin-top: 1.5rem;
+            }
+            
+            .social-icon {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Add these styles to your existing style section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                padding: 0 20px;
+                gap: 15px;
+            }
+            
+            .gallery-item {
+                height: 250px;
+            }
+        }
+
+        /* Add these CSS rules inside your existing <style> tag */
+
+        /* Mobile-first media queries */
+        @media (max-width: 768px) {
+            /* Header optimizations */
+            header {
+                padding: 10px;
+            }
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .logo-text .muscle,
+            .logo-text .paradise {
+                font-size: 20px;
+            }
+
+            /* Hero section */
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            /* Sections padding */
+            .section {
+                padding: 40px 15px;
+            }
+
+            .section h2 {
+                font-size: 32px;
+                margin-bottom: 25px;
+            }
+
+            /* Services grid */
+            .services {
+                padding: 0 15px;
+                gap: 20px;
+            }
+
+            /* Trainers grid */
+            .trainers-grid {
+                padding: 0 15px;
+                gap: 20px;
+            }
+
+            /* Pricing cards */
+            .pricing-grid {
+                padding: 0 15px;
+            }
+
+            .price-card {
+                padding: 25px 20px;
+            }
+
+            /* Calculator section */
+            .calculators-container {
+                padding: 0 15px;
+            }
+
+            .calculator {
+                padding: 20px;
+            }
+
+            /* Contact form */
+            .contact-container {
+                padding: 0 15px;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+            /* Testimonials */
+            .testimonials {
+                padding: 0 15px;
+            }
+
+            /* Location section */
+            .location-container {
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+            }
+
+            .map iframe {
+                height: 300px;
+            }
+
+            /* Navigation menu */
+            nav ul {
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+
+            /* Mobile menu button */
+            .mobile-nav-toggle {
+                display: flex;
+                z-index: 1000;
+            }
+
+            .mobile-nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .mobile-nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+
+            /* Top button */
+            .top-btn {
+                right: 15px;
+                bottom: 15px;
+                padding: 12px;
+            }
+
+            /* Stats section */
+            .stats-grid {
+                padding: 0 15px;
+                gap: 20px;
+            }
+
+            .counter {
+                font-size: 36px;
+            }
+        }
+
+        /* Add smooth transitions for better UX */
+        .mobile-nav-toggle span {
+            transition: all 0.3s ease;
+        }
+
+        nav ul {
+            transition: all 0.3s ease;
+        }
+
+        /* Improve touch targets for mobile */
+        button, 
+        .btn,
+        nav ul li a {
+            min-height: 44px;
+            padding: 12px 20px;
+        }
+
+        /* Optimize images for mobile */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Add this meta tag in your <head> section for better mobile rendering */
+        /* Mobile-specific optimizations for 6.67-inch display */
+        @media screen and (max-width: 480px) {
+            /* Header adjustments */
+            header {
+                padding: 8px 15px;
+                height: 60px;
+            }
+
+            .logo img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .logo-text .muscle,
+            .logo-text .paradise {
+                font-size: 18px;
+            }
+
+            /* Hero section */
+            .hero {
+                height: calc(100vh - 60px);
+                padding-top: 60px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+                line-height: 1.2;
+                margin-bottom: 15px;
+            }
+
+            .hero p {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+
+            /* Section adjustments */
+            .section {
+                padding: 40px 12px;
+            }
+
+            .section h2 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            /* Grid layouts */
+            .services,
+            .trainers-grid,
+            .pricing-grid,
+            .supplements-grid,
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 0 12px;
+            }
+
+            /* Cards */
+            .service,
+            .trainer,
+            .price-card,
+            .supplement-card {
+                padding: 20px 15px;
+            }
+
+            /* Calculator section */
+            .calculator {
+                padding: 15px;
+            }
+
+            .input-group label {
+                font-size: 14px;
+            }
+
+            .input-group input,
+            .input-group select {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            /* Contact form */
+            .contact-form {
+                padding: 15px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            /* Testimonials */
+            .testimonial {
+                padding: 15px;
+            }
+
+            .testimonial img {
+                width: 80px;
+                height: 80px;
+            }
+
+            /* Footer */
+            footer {
+                padding: 20px 15px;
+                font-size: 14px;
+            }
+
+            /* Navigation menu */
+            nav ul {
+                top: 60px;
+                padding: 15px;
+            }
+
+            nav ul li a {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+
+            /* Touch targets */
+            button,
+            .btn,
+            nav ul li a,
+            .input-group input,
+            .input-group select {
+                min-height: 48px; /* Google's recommended minimum touch target size */
+            }
+
+            /* Spacing */
+            .section p {
+                font-size: 14px;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            /* Images */
+            .gallery-item {
+                height: 200px;
+            }
+        }
+
+        /* Additional touch optimizations */
+        @media (hover: none) {
+            /* Remove hover effects on touch devices */
+            .service:hover,
+            .trainer:hover,
+            .price-card:hover,
+            .supplement-card:hover {
+                transform: none;
+            }
+
+            /* Increase touch targets for buttons */
+            .btn,
+            .submit-btn,
+            .mobile-nav-toggle {
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* Adjust scrolling behavior */
+            html {
+                scroll-padding-top: 60px;
+            }
+        }
+
+        /* Performance optimizations */
+        @media screen and (max-width: 480px) {
+            /* Reduce animations for better performance */
+            * {
+                animation-duration: 0.1s !important;
+                transition-duration: 0.1s !important;
+            }
+
+            /* Use hardware acceleration for smooth scrolling */
+            .section {
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+            }
+
+            /* Optimize images for mobile */
+            img {
+                max-width: 100%;
+                height: auto;
+                width: auto\9; /* IE8 */
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("29-2dRF0xdBLjU-xh"); // Your public key is already correct
+        })();
+    </script>
+</head>
+<body>
+
+<div class="progress-bar"></div>
+
+<header>
+    <div class="logo">
+        <img src="img.jpg" alt="The Muscle Paradise Logo">
+        <div class="logo-text">
+            <div class="title-line">
+                <span class="the">The</span>
+                <span class="muscle">Muscle</span>
+                <span class="paradise">Paradise</span>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li> <!-- Add this line -->
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#calculators">Calculators</a></li>
+            <li><a href="#supplements">Supplements</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="mobile-nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div>
+        <h1>Transform Your Body</h1>
+        <p>Your Journey to Greatness Starts Here</p>
+        <button class="btn" onclick="window.open('https://wa.me/919140328634?text=Hi,%20I%27m%20interested%20in%20joining%20The%20Muscle%20Paradise%20gym.%20Please%20provide%20more%20information.', '_blank')">
+            <i class="fab fa-whatsapp"></i> Start Training
+        </button>
+    </div>
+</section>
+
+<section class="section" id="about">
+    <h2>About Us</h2>
+    <p>At Muscle Paradise, we believe in transforming lives through fitness. Our state-of-the-art facility and expert trainers are committed to helping you achieve your fitness goals and unlock your full potential.</p>
+</section>
+
+<section class="section" id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+        <div class="service">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80" alt="Personal Training">
+            <h3>Personal Training</h3>
+            <p>Get personalized workout plans and one-on-one guidance from our certified trainers.</p>
+        </div>
+        <div class="service">
+            <img src="https://images.unsplash.com/photo-1571388208497-71bedc66e932?q=80" alt="Group Classes">
+            <h3>Group Classes</h3>
+            <p>Join our energetic group sessions for a motivating and fun workout experience.</p>
+        </div>
+        <div class="service">
+            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80" alt="Nutrition Plans">
+            <h3>Nutrition Plans</h3>
+            <p>Receive customized meal plans and nutrition guidance to maximize your results.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Add this after the services section and before trainers section -->
+<section class="section" id="gallery">
+    <h2>Our Facility</h2>
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="gym1.jpg" alt="Gym Interior" loading="lazy">
+        </div>
+        <div class="gallery-item">
+            <img src="gym2.jpg" alt="Weight Area" loading="lazy">
+        </div>
+        <div class="gallery-item">
+            <img src="gym3.jpg" alt="Cardio Section" loading="lazy">
+        </div>
+        <div class="gallery-item">
+            <img src="gym4.jpg" alt="Training Area" loading="lazy">
+        </div>
+        <div class="gallery-item">
+            <img src="gym5.jpg" alt="Equipment" loading="lazy">
+        </div>
+        <div class="gallery-item">
+            <img src="gym6.jpg" alt="Locker Room" loading="lazy">
+        </div>
+    </div>
+</section>
+
+<section class="section" id="trainers">
+    <h2>Our Expert Trainers</h2>
+    <div class="trainers-grid">
+        <div class="trainer">
+            <img src="trainer1.jpg" alt="Trainer">
+            <h3>Robert Jr.</h3>
+            <p>Certified Personal Trainer</p>
+        </div>
+        <div class="trainer">
+            <img src="trainer2.jpg" alt="Trainer">
+            <h3>Sarah Williams</h3>
+            <p>Fitness & Nutrition Expert</p>
+        </div>
+        <div class="trainer">
+            <img src="trainer3.jpg" alt="Trainer">
+            <h3>Natalia Romanova</h3>
+            <p>Strength & Conditioning Coach</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="pricing">
+    <h2>Membership Plans</h2>
+    <div class="pricing-grid">
+        <div class="price-card">
+            <h3>Basic</h3>
+            <div class="price">
+                <span class="amount">₹999</span>
+                <span class="period">/month</span>
+            </div>
+            <ul class="features">
+                <li>Access to Gym Floor</li>
+                <li>Basic Equipment Usage</li>
+                <li>Locker Room Access</li>
+                <li>Free Parking</li>
+                <li>2 Guest Passes/Month</li>
+            </ul>
+            <button class="btn">Choose Plan</button>
+        </div>
+        
+        <div class="price-card featured">
+            <div class="popular-tag">Most Popular</div>
+            <h3>Premium</h3>
+            <div class="price">
+                <span class="amount">₹1,999</span>
+                <span class="period">/month</span>
+            </div>
+            <ul class="features">
+                <li>All Basic Features</li>
+                <li>Group Classes</li>
+                <li>Personal Training Session</li>
+                <li>Nutrition Consultation</li>
+                <li>4 Guest Passes/Month</li>
+            </ul>
+            <button class="btn">Choose Plan</button>
+        </div>
+        
+        <div class="price-card">
+            <h3>Elite</h3>
+            <div class="price">
+                <span class="amount">₹2,999</span>
+                <span class="period">/month</span>
+            </div>
+            <ul class="features">
+                <li>All Premium Features</li>
+                <li>Unlimited Classes</li>
+                <li>2 PT Sessions/Month</li>
+                <li>Sauna & Spa Access</li>
+                <li>6 Guest Passes/Month</li>
+            </ul>
+            <button class="btn">Choose Plan</button>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="calculators">
+    <h2>Fitness Calculators</h2>
+    <div class="calculators-container">
+        <!-- BMI Calculator -->
+        <div class="calculator">
+            <h3>BMI Calculator</h3>
+            <div class="calculator-inputs">
+                <div class="input-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="Enter your weight" min="1" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" placeholder="Enter your height" min="1" step="0.1">
+                </div>
+                <button class="btn" onclick="calculateBMI()">Calculate BMI</button>
+            </div>
+            <div id="bmi-result" class="result-hidden">
+                <h3>Your BMI: <span id="bmi-value"></span></h3>
+                <p id="bmi-category"></p>
+                <p id="bmi-message"></p>
+            </div>
+        </div>
+
+        <!-- Calorie Calculator -->
+        <div class="calculator">
+            <h3>Calorie Calculator</h3>
+            <div class="calculator-inputs">
+                <div class="input-group">
+                    <label for="cal-age">Age</label>
+                    <input type="number" id="cal-age" placeholder="Enter your age" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="cal-gender">Gender</label>
+                    <select id="cal-gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="cal-weight">Weight (kg)</label>
+                    <input type="number" id="cal-weight" placeholder="Enter your weight" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="cal-height">Height (cm)</label>
+                    <input type="number" id="cal-height" placeholder="Enter your height" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="activity-level">Activity Level</label>
+                    <select id="activity-level">
+                        <option value="1.2">Sedentary (little or no exercise)</option>
+                        <option value="1.375">Light exercise (1-3 days/week)</option>
+                        <option value="1.55">Moderate exercise (3-5 days/week)</option>
+                        <option value="1.725">Heavy exercise (6-7 days/week)</option>
+                        <option value="1.9">Athlete (2x per day)</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="calculateCalories()">Calculate Calories</button>
+            </div>
+            <div id="calorie-result" class="result-hidden">
+                <h3>Daily Calories Needed:</h3>
+                <p id="calorie-maintenance"></p>
+                <div id="calorie-goals">
+                    <p id="calorie-cut"></p>
+                    <p id="calorie-bulk"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="supplements">
+    <h2>Supplements</h2>
+    <div class="supplements-grid">
+        <div class="supplement-card">
+            <img src="whey-protein.jpg" alt="Whey Protein">
+            <h3>Whey Protein</h3>
+            <p class="price">₹2,499</p>
+            <div class="supplement-details">
+                <p>Premium quality whey protein for muscle recovery and growth</p>
+                <ul>
+                    <li>24g Protein per serving</li>
+                    <li>5.5g BCAAs</li>
+                    <li>Low in calories</li>
+                    <li>1kg Pack</li>
+                </ul>
+            </div>
+            <button class="btn">Buy Now</button>
+        </div>
+
+        <div class="supplement-card">
+            <img src="creatine.jpg" alt="Creatine">
+            <h3>Creatine Monohydrate</h3>
+            <p class="price">₹999</p>
+            <div class="supplement-details">
+                <p>Pure micronized creatine for strength and performance</p>
+                <ul>
+                    <li>5g per serving</li>
+                    <li>Unflavored</li>
+                    <li>250g Pack</li>
+                    <li>100% Pure</li>
+                </ul>
+            </div>
+            <button class="btn">Buy Now</button>
+        </div>
+
+        <div class="supplement-card">
+            <img src="pre-workout.jpg" alt="Pre Workout">
+            <h3>Pre-Workout Formula</h3>
+            <p class="price">₹1,499</p>
+            <div class="supplement-details">
+                <p>Advanced pre-workout for energy and focus</p>
+                <ul>
+                    <li>Caffeine</li>
+                    <li>Beta-Alanine</li>
+                    <li>L-Citrulline</li>
+                    <li>30 servings</li>
+                </ul>
+            </div>
+            <button class="btn">Buy Now</button>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="location">
+    <h2>Our Location</h2>
+    <div class="location-container">
+        <div class="location-info">
+            <h3>Visit The Muscle Paradise</h3>
+            <div class="address">
+                <p><i class="fas fa-map-marker-alt"></i>1420/37A, Khadepur Chauraha, Near Kameshwar Mandir, Kanpur, Uttar Pradesh 208021</p>
+                <p><i class="fas fa-clock"></i> Opening Hours:</p>
+                <ul>
+                    <li>6:00  - 12:00 (IST)</li>
+                    <li>17:00 - 22:00 (IST)</li>
+
+                    <li>Sunday: OFF</li>
+                </ul>
+            </div>
+        </div>
+        <div class="map">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3573.5031580566792!2d80.30485638657363!3d26.407234722217346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c478f8bc51b5d%3A0x1305e1da13397249!2sThe%20Muscle%20Paradise!5e0!3m2!1sen!2sin!4v1739016625221!5m2!1sen!2sin"
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <p>Ready to start your fitness journey? Get in touch with us today!</p>
+    
+    <div class="contact-container">
+        <form class="contact-form" id="contactForm" onsubmit="return handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <i class="fas fa-user input-icon"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <i class="fas fa-envelope input-icon"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}">
+                <i class="fas fa-phone input-icon"></i>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required rows="5"></textarea>
+                <i class="fas fa-comment input-icon"></i>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+        <div class="social-media-links">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/the_muscleparadise?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" target="_blank" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="testimonials">
+    <h2>What Our Members Say</h2>
+    <div class="testimonials">
+        <div class="testimonial">
+            <img src="member2.jpg" alt="Member">
+            <p>"Amazing transformation journey! The trainers are exceptional and the atmosphere is motivating. Lost 20kg in 6 months!"</p>
+            <h4>Travis Head</h4>
+            <span class="member-status">Premium Member</span>
+        </div>
+
+        <div class="testimonial">
+            <img src="member7.jpg" alt="Member">
+            <p>"Best gym I've ever been to. The personal attention and community support make all the difference."</p>
+            <h4>AB de Villiers</h4>
+            <span class="member-status">Elite Member</span>
+        </div>
+
+        <div class="testimonial">
+            <img src="member6.jpg" alt="Member">
+            <p>"The nutrition plans and supplement guidance really helped me achieve my muscle gain goals."</p>
+            <h4>Alyssa Healy</h4>
+            <span class="member-status">Premium Member</span>
+        </div>
+
+        <div class="testimonial">
+            <img src="member4.jpg" alt="Member">
+            <p>"Professional trainers and modern equipment. The atmosphere is perfect for serious fitness enthusiasts!"</p>
+            <h4>Kane Williamson</h4>
+            <span class="member-status">Basic Member</span>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="stats">
+    <h2>Our Success Story</h2>
+    <div class="stats-grid">
+        <div class="stat">
+            <span class="counter" data-target="200">0</span>
+            <p>Happy Members</p>
+        </div>
+        <div class="stat">
+            <span class="counter" data-target="3">0</span>
+            <p>Expert Trainers</p>
+        </div>
+        <div class="stat">
+            <span class="counter" data-target="50">0</span>
+            <p>Success Stories</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 The Muscle Paradise. All Rights Reserved.</p>
+        <div class="developer-info">
+            <p>Developed by Devansh</p>
+            <div class="social-links">
+                <a href="mailto:idevanshp955@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/devansh-patel-727677349"  target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<button id="topBtn" class="top-btn">↑</button>
+
+<script>
+// Improved BMI calculator function
+function calculateBMI() {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to m
+    const resultDiv = document.getElementById('bmi-result');
+    const bmiValue = document.getElementById('bmi-value');
+    const bmiCategory = document.getElementById('bmi-category');
+    const bmiMessage = document.getElementById('bmi-message');
+    
+    // Input validation
+    if (!weight || !height || weight <= 0 || height <= 0) {
+        alert('Please enter valid weight and height values');
+        return;
+    }
+    
+    // Calculate BMI
+    const bmi = (weight / (height * height)).toFixed(1);
+    
+    // Determine BMI category and message
+    let category, message;
+    if (bmi < 18.5) {
+        category = 'Underweight';
+        message = 'Consider consulting with our nutrition experts to help you reach a healthy weight.';
+    } else if (bmi >= 18.5 && bmi < 25) {
+        category = 'Normal weight';
+        message = 'Great job! Maintain your healthy lifestyle with our fitness programs.';
+    } else if (bmi >= 25 && bmi < 30) {
+        category = 'Overweight';
+        message = 'Our personal trainers can help you achieve your weight loss goals.';
+    } else {
+        category = 'Obese';
+        message = 'Let us help you start your fitness journey with a personalized plan.';
+    }
+    
+    // Update the display
+    bmiValue.textContent = bmi;
+    bmiCategory.textContent = `Category: ${category}`;
+    bmiMessage.textContent = message;
+    
+    // Show the result with animation
+    resultDiv.classList.remove('result-hidden');
+    resultDiv.style.opacity = '0';
+    setTimeout(() => {
+        resultDiv.style.opacity = '1';
+        resultDiv.style.transition = 'opacity 0.5s ease-in';
+    }, 10);
+}
+
+// Add this after your existing BMI calculator function
+function calculateCalories() {
+    const age = parseFloat(document.getElementById('cal-age').value);
+    const gender = document.getElementById('cal-gender').value;
+    const weight = parseFloat(document.getElementById('cal-weight').value);
+    const height = parseFloat(document.getElementById('cal-height').value);
+    const activity = parseFloat(document.getElementById('activity-level').value);
+
+    if (!age || !weight || !height || age <= 0 || weight <= 0 || height <= 0) {
+        alert('Please enter valid values for all fields');
+        return;
+    }
+
+    // Mifflin-St Jeor Equation
+    let bmr;
+    if (gender === 'male') {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+    } else {
+        bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+    }
+
+    const maintenanceCalories = Math.round(bmr * activity);
+    const cutCalories = Math.round(maintenanceCalories - 500);
+    const bulkCalories = Math.round(maintenanceCalories + 500);
+
+    const resultDiv = document.getElementById('calorie-result');
+    const maintenance = document.getElementById('calorie-maintenance');
+    const cut = document.getElementById('calorie-cut');
+    const bulk = document.getElementById('calorie-bulk');
+
+    maintenance.textContent = `Maintenance: ${maintenanceCalories} calories/day`;
+    cut.textContent = `Weight Loss: ${cutCalories} calories/day`;
+    bulk.textContent = `Weight Gain: ${bulkCalories} calories/day`;
+
+    resultDiv.classList.remove('result-hidden');
+    resultDiv.style.opacity = '0';
+    setTimeout(() => {
+        resultDiv.style.opacity = '1';
+        resultDiv.style.transition = 'opacity 0.5s ease-in';
+    }, 10);
+}
+
+// Update your DOMContentLoaded event listener to include calorie calculator inputs
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('#weight, #height, #cal-age, #cal-weight, #cal-height');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.value < 0) this.value = '';
+        });
+        
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                if (this.id === 'weight' || this.id === 'height') {
+                    calculateBMI();
+                } else {
+                    calculateCalories();
+                }
+            }
+        });
+    });
+});
+
+// Add to your existing <script> section
+function handleSubmit(event) {
+    event.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const message = document.getElementById('message').value;
+    
+    // Show loading state
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    
+    // Send email using EmailJS with your service and template IDs
+    emailjs.send(
+        "idevansh", // Your service ID
+        "template_96ezxwr", // Your template ID
+        {
+            to_name: "Gym Admin",
+            from_name: name,
+            from_email: email,
+            phone_number: phone,
+            message: message,
+        }
+    ).then(
+        function(response) {
+            console.log("SUCCESS", response.status, response.text);
+            alert("Thank you for your message! We will get back to you soon.");
+            document.getElementById('contactForm').reset();
+        },
+        function(error) {
+            console.log("FAILED", error);
+            alert("Sorry, there was an error sending your message. Please try again later.");
+        }
+    ).finally(() => {
+        // Restore button state
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+    });
+    
+    return false;
+}
+
+const mobileNav = document.querySelector('.mobile-nav-toggle');
+const nav = document.querySelector('nav ul');
+
+mobileNav.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+});
+
+window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.querySelector('.progress-bar').style.width = scrolled + '%';
+});
+
+const counters = document.querySelectorAll('.counter');
+const speed = 200;
+
+const startCounting = (counter) => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const inc = target / speed;
+
+    if (count < target) {
+        counter.innerText = Math.ceil(count + inc);
+        setTimeout(() => startCounting(counter), 1);
+    } else {
+        counter.innerText = target;
+    }
+};
+
+const observerOptions = {
+    threshold: 0.7
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            startCounting(entry.target);
+        }
+    });
+}, observerOptions);
+
+counters.forEach(counter => observer.observe(counter));
+
+// Add to your existing script section
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    // Close menu when clicking a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('nav') && !e.target.closest('.mobile-nav-toggle')) {
+            nav.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+    });
+
+    // Prevent scrolling when mobile menu is open
+    mobileMenu.addEventListener('click', () => {
+        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
+    });
+});
+
+// Add touch event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Add passive event listeners for better scroll performance
+    document.addEventListener('touchstart', function(){}, {passive: true});
+    document.addEventListener('touchmove', function(){}, {passive: true});
+    
+    // Lazy load images
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    if ('loading' in HTMLImageElement.prototype) {
+        images.forEach(img => {
+            img.loading = 'lazy';
+        });
+    } else {
+        // Fallback for browsers that don't support lazy loading
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+        document.body.appendChild(script);
+    }
+
+    // Debounce scroll events
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        scrollTimeout = window.requestAnimationFrame(function() {
+            // Your scroll handling code
+        });
+    }, {passive: true});
+});
+</script>
+
+</body>
+</html>
