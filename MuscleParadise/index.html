@@ -2128,6 +2128,7 @@ const nav = document.querySelector('nav ul');
 mobileNav.addEventListener('click', () => {
     nav.classList.toggle('active');
     mobileNav.classList.toggle('active');
+    document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
 });
 
 window.addEventListener('scroll', () => {
@@ -2177,6 +2178,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', () => {
             nav.classList.remove('active');
             mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Reset overflow
         });
     });
 
